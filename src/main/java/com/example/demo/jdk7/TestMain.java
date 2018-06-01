@@ -1,73 +1,78 @@
 package com.example.demo.jdk7;
 
-import java.util.LinkedList;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * @author: Jinxing
- * @date: 2018-05-29 20:04
- **/
+ * @author JinXing
+ * @date 2018/5/30 14:32
+ */
 public class TestMain {
 
-    //原生的map调用
-    public static void test1() {
-        Map<String,Integer> map=new ConcurrentHashMap<>();
-        map.put("aa",10);
-        map.put("bb",20);
-        map.forEach((k,v)->{
-            System.out.println(k+"-->"+v);
-        });
 
-        map.remove("aa");
-        System.out.println(map.size());
-        System.out.println(map.get("aa"));
+    //原生HashMap
+    public static void tes1(){
+
+        Map<Integer,Object> map=new HashMap<>();
+        for (int i = 0; i <20 ; i++) {
+            map.put(i,"a"+i);
+        }
+
+        System.out.println("map:"+map);
+        System.out.println("map.remove(5):"+map.remove(5));
+        System.out.println("map.size():"+map.size());
+        System.out.println("map.get(0):"+map.get(0));
+        System.out.println("map:"+map);
 
     }
 
-    //自定义的arrayList map调用
-    public static void test2() {
-        ExtArrayListHashMap<String,Integer> map=new ExtArrayListHashMap<>();
-        map.put("aa",10);
-        map.put("bb",20);
-        map.put("bb",30);
-        map.remove("bb");
+    //自定义HashMap
+    public static void test2(){
+        ExtMap<Integer,Object> map=new ExtHashMap<>();
+        for (int i = 0; i <36 ; i++) {
+            map.put(i,"a"+i);
+        }
+//        map.put(32,"a32-aa");
+
+        System.out.println("map:"+map);
         System.out.println("size:"+map.size());
-        System.out.println(map.get("bb"));
+        System.out.println("map.get(32):"+map.get(32));
 
     }
 
-    //自定义的linkedList map调用
-    public static void test3() {
-        //hash算法
-        LinkedList<Entry<String,Integer>>[] linkedList=new LinkedList[998];
-        String key="aa";
-        int hashCode=key.hashCode();
-        int hash=hashCode%linkedList.length;
+    public static void test3(){
 
-        System.out.println("hashCode:"+hashCode);
-        System.out.println("hash:"+hash);
-        System.out.println("............................");
+        long startTime=System.currentTimeMillis();
+        int count=100000000;
+        for (int i = 0; i <count ; i++) {
+            int num=100%10;
+        }
 
-        ExtLinkedListMap<String,Integer> map=new ExtLinkedListMap<>();
-        map.put("aa",10);
-        map.put("bb",20);
-        map.put("bb",30);
-//        map.remove("bb");
-        System.out.println("size:"+map.size());
-        System.out.println(map.get("bb"));
-
+        System.out.println("耗时："+(System.currentTimeMillis()-startTime)/1000.00+"秒");
+        startTime=System.currentTimeMillis();
+        for (int i = 0; i <count ; i++) {
+            int num=100&10;
+        }
+        System.out.println("耗时："+(System.currentTimeMillis()-startTime)/1000.00+"秒");
     }
 
 
+    public static void test4(){
+
+
+
+    }
 
     public static void main(String[] args) {
-//    	test1();
+//        tes1();
 
-//        test2();
+        test2();
+//          test3();
 
-        test3();
 
     }
+
+
+
 
 }

@@ -1,4 +1,4 @@
-package com.example.demo.jdk7;
+package com.example.demo.linkedlist;
 
 /**
  * @author: Jinxing
@@ -12,5 +12,13 @@ public class Entry<Key,Value> {
     public Entry(Key key, Value value) {
         this.key = key;
         this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return "Entry{" +
+                "key=" + key +
+                ", value=" + value +
+                '}';
     }
 }

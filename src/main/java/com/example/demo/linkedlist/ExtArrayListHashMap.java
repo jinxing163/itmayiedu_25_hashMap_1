@@ -1,4 +1,4 @@
-package com.example.demo.jdk7;
+package com.example.demo.linkedlist;
 
 
 import java.util.ArrayList;

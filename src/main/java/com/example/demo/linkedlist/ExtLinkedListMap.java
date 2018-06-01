@@ -1,4 +1,4 @@
-package com.example.demo.jdk7;
+package com.example.demo.linkedlist;
 
 import org.springframework.util.CollectionUtils;
 
@@ -36,6 +36,21 @@ public class ExtLinkedListMap<Key,Value> {
 
     }
 
+    //删除
+    public void remove(Key key){
+        keyIsEmpty(key);
+        LinkedList<Entry<Key, Value>> linkedList = getLinkedList(key);
+        if(!CollectionUtils.isEmpty(linkedList)){
+            for (Entry<Key, Value> entry : linkedList) {
+                if(entry!=null && (entry.key.equals(key) || entry.key ==key)){
+                    linkedList.remove(entry);
+                    --size;
+                    break;
+                }
+            }
+        }
+
+    }
 
     public int size(){
         return size;
@@ -51,9 +66,7 @@ public class ExtLinkedListMap<Key,Value> {
     private Entry<Key, Value> getEntry(Key key){
 
         if(size >0){
-            keyIsEmpty(key);
-            int hash = getHash(key);
-            LinkedList<Entry<Key, Value>> table = tables[hash];
+            LinkedList<Entry<Key, Value>> table = getLinkedList(key);
             if(!CollectionUtils.isEmpty(table)){
                 for (Entry<Key, Value> obj : table) {
                     if(obj!=null && obj.key.equals(key)){
@@ -65,6 +78,13 @@ public class ExtLinkedListMap<Key,Value> {
         }
 
         return null;
+    }
+
+    //获取key对应的量表
+    private LinkedList<Entry<Key, Value>> getLinkedList(Key key) {
+        keyIsEmpty(key);
+        int hash = getHash(key);
+        return tables[hash];
     }
 
     //hash算法
@@ -88,4 +108,21 @@ public class ExtLinkedListMap<Key,Value> {
         }
     }
 
+    @Override
+    public String toString() {
+
+        StringBuffer stringBuffer=new StringBuffer("");
+        //打印当前tables的值
+        for (LinkedList<Entry<Key, Value>> table : tables) {
+            if(table!=null){
+                LinkedList<Entry<Key, Value>> table1 = table;
+                if(!CollectionUtils.isEmpty(table1)){
+                    table1.stream().filter(obj->obj!=null).forEach(obj->{
+                        stringBuffer.append(obj+"\n");
+                    });
+                }
+            }
+        }
+        return stringBuffer.toString();
+    }
 }
