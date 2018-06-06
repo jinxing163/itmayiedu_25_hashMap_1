@@ -34,7 +34,7 @@ public class ExtHashMap<K,V>  implements ExtMap<K,V> {
         }
 
         //2.是否进行扩容
-        resize();
+//        resize();
 
         //3.判断Key是否存在
         int hash = getHash(key,DEFAULT_INITIAL_CAPACITY);
@@ -129,6 +129,7 @@ public class ExtHashMap<K,V>  implements ExtMap<K,V> {
             if(node.key.equals(key) || node.key==key){
                 return node;
             }
+            node=node.next;
         }
         return null;
     }

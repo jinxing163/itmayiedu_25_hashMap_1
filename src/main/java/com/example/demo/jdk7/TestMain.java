@@ -36,7 +36,7 @@ public class TestMain {
 
         System.out.println("map:"+map);
         System.out.println("size:"+map.size());
-        System.out.println("map.get(32):"+map.get(32));
+        System.out.println("map.get(16):"+map.get(16));
 
     }
 
